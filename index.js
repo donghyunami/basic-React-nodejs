@@ -1,6 +1,10 @@
+// 변경사항 없음
 const express = require('express');
 const app = express();
 const port = 5000;
+
+const config = require('./config/key');
+
 
 //클라이언트에서 전송된 데이터 저장하기 위해
 //데이터베이스 가져오기
@@ -14,7 +18,7 @@ app.use(express.json());
 const mongoose = require('mongoose');
 mongoose
   .connect(
-    'mongodb+srv://donghyun:asdf12@cluster0.ufgsz.mongodb.net/<dbname>?retryWrites=true&w=majority',
+    config.mongoURL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
