@@ -1,4 +1,3 @@
-// 변경사항 없음
 const express = require('express');
 const app = express();
 const port = 5000;
