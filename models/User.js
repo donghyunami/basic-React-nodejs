@@ -49,9 +49,19 @@ userSchema.pre('save', function (next) {
                 next();
             });
         });
-    };
+    } else {
+        next(); //비밀번호 변경이 아니면, 다음 단계진행
+    }
 });
 
-const User = mongoose.model('User', userSchema); //model 생성
+userSchema.methods.comparePassword = function (plainPassword, cb) {
 
+    //plainPassword 12345  || 암호화된 $2b$10$wssy7.NcYHDNftI2.C7qFOdbp8RZKnyzhs7wBwa8WP2AJo6iPLt12
+    bcrypt.compare(plainPassword, this.password, function (err, isMathch) {
+        if (err) return cb(err),
+            cb(null, isMathch)
+    })
+}
+
+const User = mongoose.model('User', userSchema); //model 생성
 module.exports = { User }

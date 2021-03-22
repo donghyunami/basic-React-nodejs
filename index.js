@@ -49,6 +49,37 @@ app.post('/register', (req, res) => {
   });
 });
 
+//로그인 관련 라우팅 설정
+app.post('/login', (req, res) => {
+
+  //요청된 이메일이 데이터베이스에서 존재하는지 조회
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if (!user) {
+      return res.json({
+        loginSuccess: false,
+        message: "제공된 이메일에 해당하는 유저가 없습니다."
+      })
+    }
+
+
+    //요청된 이메일이 데이터 베이스에 있다면, 비밀번호가 일치하는지 확인
+    user.comparePassword(req.body.password, (err, isMatch) => {
+      if (!isMatch) return res.json({ loginSuccess: false, message: "비밀번호가 틀렸습니다." })
+
+
+      //비밀번호 까지 일치하면 토큰 생성하기
+      user.generateToken((err, user) => {
+
+      })
+
+
+    })
+
+
+  })
+
+})
+
 app.listen(port, () => {
   console.log(`Expample app listening on port ${port}`);
 });
