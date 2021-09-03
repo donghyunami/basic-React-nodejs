@@ -1,8 +1,13 @@
+import Axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch} from 'react-redux';
+import { loginUser } from '../../../_actions/user_action'
 
 function LoginPage(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
 
   const onEmailHandler = e => {
     setEmail(e.currentTarget.value);
@@ -14,6 +19,21 @@ function LoginPage(props) {
 
   const onSubmitHandler = e => {
     e.preventDefault();
+    
+    let body = {
+      email: Email,
+      password: Password
+    }
+
+    dispatch(loginUser(body))
+     .then(res => {
+       if(res.payload.loginSuccess) {
+         props.history.push('/')
+         //로그인 성공시, landing page로 이동
+       } else {
+          alert('아이디 또는 비밀번호가 잘못 입력 되었습니다.\n아이디와 비밀번호를 정확히 입력해 주세요.')
+       }
+     })
   };
 
   return (
@@ -31,9 +51,9 @@ function LoginPage(props) {
         onSubmit={onSubmitHandler}
       >
         <label>Email</label>
-        <input type='email' value={email} onChange={onEmailHandler} />
+        <input type='email' value={Email} onChange={onEmailHandler} />
         <label>PW</label>
-        <input type='password' value={password} onChange={onPasswordHandler} />
+        <input type='password' value={Password} onChange={onPasswordHandler} />
         <br />
         <button type='submit'>Login</button>
       </form>
