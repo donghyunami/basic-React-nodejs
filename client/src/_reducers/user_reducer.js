@@ -8,11 +8,10 @@ export default function loginUser(preState = {}, action) {
         loginSuccess: action.payload,
         //LOGIN_USER type의 payload 값을 저장
       };
-    case REGISTER_USER: //action.type === LOGIN_USER
+    case REGISTER_USER: //action.type === REGISTER_USER
       return {
         ...preState,
         register: action.payload,
-        //LOGIN_USER type의 payload 값을 저장
       };
     default:
       return preState;
