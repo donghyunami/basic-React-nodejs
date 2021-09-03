@@ -52,7 +52,7 @@ function LoginPage(props) {
       >
         <label>Email</label>
         <input type='email' value={Email} onChange={onEmailHandler} />
-        <label>PW</label>
+        <label>Password</label>
         <input type='password' value={Password} onChange={onPasswordHandler} />
         <br />
         <button type='submit'>Login</button>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_USER } from './types';
+import { LOGIN_USER, REGISTER_USER } from './types';
 
 export function loginUser(dataToSubmit) {
   const request = axios
@@ -8,6 +8,18 @@ export function loginUser(dataToSubmit) {
 
   return {
     type: LOGIN_USER,
+    payload: request,
+    //서버측에서 받은 정보를 payload에 저장
+  };
+}
+
+export function registerUser(dataToSubmit) {
+  const request = axios
+    .post('/api/users/register', dataToSubmit)
+    .then(res => res.data);
+
+  return {
+    type: REGISTER_USER,
     payload: request,
     //서버측에서 받은 정보를 payload에 저장
   };
