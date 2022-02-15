@@ -15,7 +15,7 @@ export default function auth_(SpecificComponent, option, adminRoute = null) {
           }
         } else {
           //로그인 한 상태
-          if (adminRoute && !res.payload.isAuth) {
+          if (adminRoute && !res.payload.isAdmin) {
             props.history.push('/');
           } else {
             if (option === false) {
