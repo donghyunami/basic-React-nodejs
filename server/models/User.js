@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({ // Schema 생성
     email: {
         type: String, //trim 공백제거
         trim: true,
-        unique: 1
+        unique: true
     },
     password: {
         type: String,
