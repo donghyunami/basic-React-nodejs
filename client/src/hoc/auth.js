@@ -29,7 +29,7 @@ export default function auth_(SpecificComponent, option, adminRoute = null) {
         }
       });
     });
-    return <SpecificComponent/>;
+    return <SpecificComponent {...props} user={user} />;
   }
   return AuthenticaionCheck;
 }
