@@ -43,7 +43,7 @@ function RegisterPage(props) {
        if(res.payload.success) {
          props.history.push('/login')
        } else {
-          alert('등록된 이메일입니다.');
+          alert('비밀번호는 5자리 이상이어야합니다.');
        }
      });
   };
